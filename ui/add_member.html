@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Member</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="add_member.css">
+	<script type="text/javascript" src="add_member.js"></script>
+</head>
+<body>
+	<h3><center>Add Member</center></h3>
+	<form class="member-form" id="add_member_form" method="get" onsubmit="addMember();return false">
+	  	<div class="col-lg-5" >
+	    	<input type="text" class="form-control" id="name" placeholder="Name" required>
+	  	</div>
+	  	<div class="col-lg-5">
+	    	<input type="text" class="form-control" id="team" placeholder="Team" required>
+	  	</div>
+	  	<div class="col-lg-5">
+	    	<input type="text" class="form-control" id="department" placeholder="Department" required>
+	  	</div>
+	  	<div class="col-lg-5">
+	    	<input type="text" class="form-control" id="contact" placeholder="Contact" required>
+	  	</div>
+	  	<div class="col-lg-5">
+	    	<input type="email" class="form-control" id="email" placeholder="email" required>
+	  	</div>
+	  	<div class="col-lg-5">
+	  		<input type="submit" class="form-control" value="Submit">
+	  	</div>
+	</form>
+
+</body>
+</html>

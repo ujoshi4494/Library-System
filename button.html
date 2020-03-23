@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>press button</title>
+</head>
+<body>
+	<h2>Press Button</h2>
+	<form method="post" onsubmit="showName()">
+		<input type="text" name="name" id="name" placeholder="Name"><br><br>
+		<input type="submit" value="Submit">
+	</form>
+
+	<script type="text/javascript">
+		async function showName() {
+			const fetchAPI = await fetch('http://localhost:3004/tags');
+			const data = await fetchAPI.json();
+			for (let row of data.data) {
+				console.log(row)
+			}
+		}
+	</script>
+</body>
+</html>

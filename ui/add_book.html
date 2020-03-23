@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="add_book.css">
+	<script type="text/javascript" src="add_book.js"></script>
+</head>
+<body>
+	<h3><center>Add Book</center></h3>
+	<form class="book-form" id="add_book_form" method="post" onsubmit="addBook();return false">
+	  	<div class="col-lg-5" >
+	    	<input type="text" class="form-control" id="name" name="name" placeholder="Book Name" required >
+	  	</div>
+	  	<div class="col-lg-5">
+	    	<input type="text" class="form-control" id="author" placeholder="Author Name" required>
+	  	</div>
+	  	<div class="col-lg-5">
+	    	<input type="Number" class="form-control" id="copies_available" placeholder="Available copies" required >
+	  	</div>
+	  	<div class="col-lg-5">
+	    	<input type="text" class="form-control" id="tags" placeholder="Tags" required >
+	  	</div>
+	  	<div class="col-lg-5">
+	  		<input type="submit" class="form-control" value="Submit">
+	  	</div>
+	</form>
+
+</body>
+</html>

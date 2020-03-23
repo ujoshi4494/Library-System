@@ -1,0 +1,39 @@
+h2#title {
+	text-align: center;
+}
+
+div#show_member_data {
+    width: 85%;
+    margin-top: 20px;
+    padding-left: 15%;
+	border: black 1px;
+}
+th {
+    background: #f1f1f1;
+    font-weight: bold;
+    padding: 6px;
+}
+td {
+    background: #f9f9f9;
+    padding: 6px;
+}
+
+
+input#searchBox {
+	width: 30%;
+	margin-left: 35%;
+	height: 40px;
+	border-radius: 5px;
+	padding: 5px;
+	border-color: black;
+	border-style: bold;
+	margin-bottom: 40px; 
+}
+
+button#searchbtn {
+	height: 40px;
+	margin-left: 5px;
+	background-color: #CAEFF0;
+	width: 7%;
+	border-radius: 6px;
+}

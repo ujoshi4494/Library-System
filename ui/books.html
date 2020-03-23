@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Books</title>
+	<link rel="stylesheet" type="text/css" href="books.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="books.js"></script>
+</head>
+
+<body>
+	<h2 id="title">Books</h2>
+	<input type="text" id="searchBox" name = "searchBox" placeholder="Search here">
+	<button id="searchbtn">Search</button>
+	<div id = "show_book_data" ></div><br>
+	<div  id = "book-pagination" class="pagination justify-content-center" class="book-pagination"></div>
+	
+</body>
+
+<script type="text/javascript">
+	
+	document.getElementById('searchbtn').addEventListener("click", async function(){
+		const searchItem = document.getElementById('searchBox').value;
+		if (searchItem == "") {
+			alert("Enter something to search!!");
+		}
+		else {
+			const body = {"searchItem" : searchItem};
+			const searchedBooks = await getSearchedBooks(body);
+			displayBook(searchedBooks, 1);
+			paginationBook(searchedBooks[0].totalSearchedBooks);
+		}
+	});
+
+	const paginationBook = async function(totalBooks) {
+		const pages = Math.ceil(totalBooks/4);
+		const wrapper = document.getElementById('book-pagination');
+		wrapper.innerHTML = "";
+		for (let page=1; page<=pages; page++) {
+			wrapper.innerHTML += `<button value = ${page} id = ${page} class = "page btn btn btn-info">${page}</button>`
+		}
+	}
+	
+
+	$("#book-pagination").click(async function () {
+		$('button').click(async function () {
+			let searchItem;
+			const searchBox = document.getElementById('searchBox');
+			if (searchBox == null) {
+				searchItem = "";
+			}
+			else{ 
+				searchItem = searchBox.value;
+			}
+			const body = {
+				"searchItem" : searchItem,
+				"page_no" : this.id
+			}
+			const searchedBooks = await getSearchedBooks(body);
+			displayBook(searchedBooks, this.id);
+		})
+	});	
+	
+</script>
+
+</html>
