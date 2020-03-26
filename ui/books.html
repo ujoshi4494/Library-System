@@ -38,30 +38,15 @@
 		const wrapper = document.getElementById('book-pagination');
 		wrapper.innerHTML = "";
 		for (let page=1; page<=pages; page++) {
-			wrapper.innerHTML += `<button value = ${page} id = ${page} class = "page btn btn btn-info">${page}</button>`
+			wrapper.innerHTML += `<button value = ${page} id = ${page} class = "pagingbtn page btn btn btn-info">${page}</button>`
 		}
+
+		bindPaginationData();
 	}
 	
-
-	$("#book-pagination").click(async function () {
-		$('button').click(async function () {
-			let searchItem;
-			const searchBox = document.getElementById('searchBox');
-			if (searchBox == null) {
-				searchItem = "";
-			}
-			else{ 
-				searchItem = searchBox.value;
-			}
-			const body = {
-				"searchItem" : searchItem,
-				"page_no" : this.id
-			}
-			const searchedBooks = await getSearchedBooks(body);
-			displayBook(searchedBooks, this.id);
-		})
-	});	
 	
 </script>
-
+<script>
+	
+</script>
 </html>

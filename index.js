@@ -89,6 +89,16 @@ app.post('/books', (req,res) => {
 	})
 })
 
+app.post('/borrowers', (req, res) => {
+	const body = req.body;
+	helper.postBorrowerData(body, (err, data) => {
+		if (!err) {
+			return res.json({data : data});
+		}
+		return res.json({Error : err});	
+	})
+})
+
 app.put('/members/:id',(req,res)=>{
 	const id = req.params.id;
 	const body = req.body;
@@ -144,7 +154,7 @@ app.delete('/members/:id',(req,res)=>{
 })
 
 
-app.get('/borrowers/',(req,res)=>{
+app.get('/borrowers',(req,res)=>{
 	helper.getBorrowerData((err,data)=>{
 		if (!err){
 			return res.json({Borrowers:data})
@@ -153,29 +163,6 @@ app.get('/borrowers/',(req,res)=>{
 	})
 })
 
-app.get('/borrowers/:id',(req,res)=>{
-	const id = req.params.id;
-	const result = helper.getBorrower(id,(err,data)=>{
-		if (!err){
-			if (data.length!==0){
-				return res.status(200).json({"Borrower":data});
-			}
-			return res.send({msg:`No Borrower of ID : ${id}`})
-		}
-		return res.json({Error:err})
-	});
-})
-
-
-app.post('/borrowers',(req,res)=>{
-	const body = req.body;
-	helper.postBorrowerData(body,(err,data)=>{
-		if (!err){
-			return res.json({Borrower:body});
-		}
-		return res.json({Error:err})
-	})	
-})
 
 app.put('/borrowers/:id',(req,res)=>{
 	const id = req.params.id;
@@ -226,7 +213,7 @@ app.post('/books/search',(req,res) => {
 })
 
 app.post('/members/search',(req,res) => {
-	const searchElement = req.body.member;
+	const searchElement = req.body.searchItem;
 	let pageNo = req.body.page_no;
 	let limitPerPage = req.body.limitPerPage;
 

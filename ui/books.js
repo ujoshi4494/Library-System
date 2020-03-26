@@ -9,26 +9,34 @@ const getSearchedBooks = async function(body) {
     		}
     	}
 	);
+
 	const bookDataJSON = await bookData.json();
 	const books = bookDataJSON.data;
 	return books;
 }
 
+const bindPaginationData = function() {
+	$('.pagingbtn').click(async function () {
+		let searchItem;
+		const searchBox = document.getElementById('searchBox');
+		if (searchBox == null) {
+			searchItem = "";
+		}
+		else{ 
+			searchItem = searchBox.value;
+		}
+		const body = {
+			"searchItem" : searchItem,
+			"page_no" : this.id
+		}
 
-const getTotalBooks = async function() {
-	const totalBooks = await fetch('http://localhost:3004/books');
-	const bookDataJSON = await totalBooks.json();
-	const books = bookDataJSON.data;
-	return books; 
+		const searchedBooks = await getSearchedBooks(body);
+		displayBook(searchedBooks, this.id);
+	});
 }
 
-const getNoOfBooks = async function() {
-	const totalBooks = await getTotalBooks();
-	return totalBooks.length;
-}
 
 const displayBook = async function(books, pageNo) {
-	console.log(books);
 	const table = document.createElement("table");
 	table.classList.add("table");
 

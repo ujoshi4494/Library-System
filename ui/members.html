@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="members.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script type="text/javascript" src="members.js"></script>
 </head>
 <body >
@@ -12,10 +13,35 @@
 	<input type="text" id="searchBox" placeholder="Search here">
 	<button id="searchbtn">Search</button>
 	<div id = "show_member_data" ></div>
+	<div  id = "member-pagination" class="pagination justify-content-center" class="member-pagination"></div>
+
 </body>
 
 <script type="text/javascript">
 
+	document.getElementById('searchbtn').addEventListener("click", async function(){
+		const searchItem = document.getElementById('searchBox').value;
+		if (searchItem == "") {
+			alert("Enter something to search!!");
+		}
+		else {
+			const body = {"searchItem" : searchItem};
+			const searchedMembers = await getSearchedMembers(body);
+			displayMember(searchedMembers, 1);
+			paginationMember(searchedMembers[0].totalSearchedMembers);
+		}
+	});
+
+	const paginationMember = async function(totalMembers) {
+		const pages = Math.ceil(totalMembers/4);
+		const wrapper = document.getElementById('member-pagination');
+		wrapper.innerHTML = "";
+		for (let page=1; page<=pages; page++) {
+			wrapper.innerHTML += `<button value = ${page} id = ${page} class = "pagingbtn page btn btn btn-info">${page}</button>`
+		}
+
+		bindPaginationData();
+	}
 </script>
 
 </html>

@@ -147,9 +147,8 @@ deleteBook = function(id,callback){
 }
 
 postBorrowerData = function(body,callback){
-	let {id,issued_from,issued_to,issued_by,member_id,book_id,status} = body;
-
-	mysqlconnection.query(`insert into borrower_detail (id,issued_from,issued_to,issued_by,member_id,book_id,status) values (${parseInt(id)},${STR_TO_DATE(issued_from, '%d-%M-%Y')},"${STR_TO_DATE(issued_to, '%d-%M-%Y')}","${parseInt(issued_by)}","${parseInt(member_id)}",${parseInt(book_id)}),"${status}"`,(err,records,fields)=>{
+	let {last_date_to_return, member_id, book_id, status} = body;
+	mysqlconnection.query(`insert into borrower_detail (last_date_to_return, member_id, book_id, status) values ("${last_date_to_return}", ${parseInt(member_id)}, ${parseInt(book_id)}, "${status}")`,(err,records,fields)=>{
 		if (!err){
 			return callback(null,records);
 		}
@@ -179,14 +178,15 @@ searchBook = function(searchElement, pageNo, limitPerPage, callback) {
 
 searchMember = function(searchElement, pageNo, limitPerPage, callback) {
 
-	const query = `select * from member where name like "%${searchElement}%" 
+	const query = `select *, (select count(*) from member where name like "%${searchElement}%") as totalSearchedMembers from member where name like "%${searchElement}%" 
 	limit ${(parseInt(pageNo)-1)*limitPerPage}, ${limitPerPage}` ; 
 
 	mysqlconnection.query(query,(err,records) => {
 		if (!err) {
+			console.log("member", records);
 			return callback(null, records);
 		}
-		return callback(err,null);
+		return callback(err);
 	})
 }
 
@@ -196,7 +196,7 @@ getTag = function (id, callback){
 		if (!err){
 			return callback(null,records);
 		}
-		return callback(err,null);
+		return callback(err);
 	})
 }
 
@@ -205,7 +205,7 @@ getTagData = function(callback) {
 		if (!err){
 			return callback(null,records);
 		}
-		return callback(err,null);
+		return callback(err);
 	})
 }
 
@@ -214,7 +214,7 @@ deleteTag = function(id, callback){
 		if (!err) {
 			return callback(null, `Tag ID ${id} has been successfully deleted!`);
 		}
-		return callback(err, null);
+		return callback(err);
 	})
 }
 
